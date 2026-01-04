@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Queremos Gorditas - Las mejores gorditas tradicionales en Aguascalientes">
+  <title>Queremos Gorditas - Las mejores gorditas de Aguascalientes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Exo', sans-serif;
+      background-color: #fff8f0;
+    }
+   .logo {
+      max-width: 70px;
+      height: auto;
+      transition: transform 0.3s ease;
+      background-color: white;
+      border-radius: 50%;
+      padding: 5px;
+    }
+    .logo:hover {
+      transform: scale(1.05);
+    }
+    .menu-item {
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+    .menu-item:hover {
+      transform: translateY(-5px);
+      border-color: #ff802b;
+      box-shadow: 0 10px 20px rgba(255, 128, 43, 0.2);
+    }
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #ff6600;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    #back-to-top:hover {
+      background-color: #cc5200;
+      transform: scale(1.1);
+    }
+    .hero {
+      background: linear-gradient(rgba(0, 34, 68, 0.85), rgba(255, 102, 0, 0.7)), url('https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+    .section-title {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      background-color: #ff802b;
+      bottom: -10px;
+      left: 20%;
+      border-radius: 2px;
+    }
+    .price-tag {
+      background-color: #ff802b;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-weight: bold;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 1.2rem;
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      margin-bottom: 3rem;
+    }
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    .carousel-item {
+      min-width: 100%;
+      transition: opacity 0.5s ease;
+    }
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background-color 0.3s;
+    }
+    .carousel-control:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .carousel-control.prev {
+      left: 15px;
+    }
+    .carousel-control.next {
+      right: 15px;
+    }
+    @media (max-width: 768px) {
+      .logo {
+        max-width: 100px;
+        top: 15px;
+        left: 15px;
+      }
+      .hero {
+        height: 60vh;
+      }
+    }
+    .whatsapp-float {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      background-color: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+      z-index: 100;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .whatsapp-float:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+    }
+    .whatsapp-text {
+      position: absolute;
+      left: 70px;
+      background-color: #25D366;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    .whatsapp-float:hover .whatsapp-text {
+      opacity: 1;
+    }
+    .highlight-card {
+      background: linear-gradient(135deg, #ff802b, #ff6600);
+      color: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 15px 30px rgba(255, 102, 0, 0.2);
+    }
+    .floating-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Logotipo -->
+
+  <!-- WhatsApp flotante -->
+  <a href="https://wa.me/+524491257560?text=Hola,%20me%20interesan%20sus%20gorditas,%20¿podrían%20darme%20más%20información?" target="_blank" class="whatsapp-float">
+    <i class="fab fa-whatsapp fa-2x"></i>
+    <span class="whatsapp-text">¡Ordene por WhatsApp!</span>
+  </a>
+
+  <header class="bg-[#002244] text-white sticky top-0 z-50 shadow-lg">
+<nav class="w-full px-6 py-3 flex items-center">
+    
+    <!-- Logo -->
+    <a href="#inicio" class="flex items-center space-x-3 mr-10">
+      <img src="Logo.png" alt="Logotipo Queremos Gorditas" class="logo">
+      <span class="text-xl font-bold hidden sm:block">Queremos Gorditas</span>
+    </a>
+
+   <!-- Menú móvil -->
+<div id="mobile-menu" class="flex space-x-8 ml-auto hidden md:flex">
+  <a href="#inicio" class="block py-3 border-b border-white/20">Inicio</a>
+  <a href="#menu-diario" class="block py-3 border-b border-white/20">Menú Diario</a>
+  <a href="#combos" class="block py-3 border-b border-white/20">Combos</a>
+  <a href="#contacto" class="block py-3 border-b border-white/20">Contacto</a>
+  <a href="#patrocinios" class="block py-3 border-b border-white/20">Patrocinios</a>
+  <a href="#alianzas" class="block py-3 border-b border-white/20">Alianzas</a>
+  <a href="#eventos" class="block py-3 border-b border-white/20">Eventos</a>
+  <a href="#comedor-itinerante" class="block py-3 border-b border-white/20">Comedor Itinerante</a>
+  <a href="#embajadores" class="block py-3 border-b border-white/20">Embajadores</a>
+  <a href="#franquicias" class="block py-3">Franquicias</a>
+</div>
+
+
+    <!-- Botón menú móvil -->
+    <div class="md:hidden ml-auto">
+      <button onclick="toggleMenu()" class="focus:outline-none">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+
+  </nav>
+</header>
+
+
+  <!-- Hero Section -->
+  <section id="inicio" class="hero">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-pulse">Queremos Gorditas</h1>
+      <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">Las gorditas más auténticas y deliciosas de Aguascalientes, hechas con receta tradicional y los mejores ingredientes.</p>
+      <div class="flex flex-col md:flex-row justify-center gap-6">
+        <a href="#menu-diario" class="bg-[#ff6600] hover:bg-[#cc5200] text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-lg floating-animation">Ver Menú</a>
+        <a href="#contacto" class="bg-transparent border-2 border-white hover:bg-white hover:text-[#002244] text-white font-bold py-4 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105">Ordenar Ahora</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Botón Regresar al Inicio -->
+  <button id="back-to-top" onclick="scrollToTop()">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- Tarjeta destacada -->
+  <div class="container mx-auto px-4">
+    <div class="highlight-card text-center">
+      <h2 class="text-3xl font-bold mb-4">¡Promoción Especial!</h2>
+      <p class="text-xl mb-2">Lunes a Jueves: 2x1 en gorditas de chicharrón</p>
+      <p class="text-lg">De 2:00 PM a 6:00 PM</p>
+    </div>
+  </div>
+
+  <!-- Menú Diario -->
+  <section id="menu-diario" class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-4 section-title">Menú Diario</h2>
+      <p class="text-xl text-center mb-12 text-gray-600 max-w-3xl mx-auto">Descubre nuestras opciones frescas y deliciosas que cambian todos los días. ¡Siempre hay algo nuevo para probar!</p>
+      
+      <div class="carousel">
+        <div class="carousel-inner" id="carousel-inner">
+          <!-- Las imágenes del carrusel se generarán con JavaScript -->
+        </div>
+        <button class="carousel-control prev" onclick="prevSlide()">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="carousel-control next" onclick="nextSlide()">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+      
+      <div id="menu-items" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+
+  <!-- Combos -->
+  <section id="combos" class="py-16 bg-[#f9f9f9]">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-center mb-4 section-title">Combos Especiales</h2>
+      <p class="text-xl text-center mb-12 text-gray-600 max-w-3xl mx-auto">Aprovecha nuestras promociones especiales y combos para todos los gustos. ¡Perfectos para compartir!</p>
+      <div id="combo-items" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+
+  <!-- Patrocinios -->
+<section id="patrocinios" class="py-16 bg-[#f9f9f9]">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4 section-title">Patrocinios</h2>
+    <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+      Trabajamos de la mano con marcas y empresas que creen en el sabor tradicional y el apoyo local.
+    </p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 items-center">
+      <div class="bg-white p-6 rounded-xl shadow-md">Marca Patrocinadora</div>
+      <div class="bg-white p-6 rounded-xl shadow-md">Marca Patrocinadora</div>
+      <div class="bg-white p-6 rounded-xl shadow-md">Marca Patrocinadora</div>
+      <div class="bg-white p-6 rounded-xl shadow-md">Marca Patrocinadora</div>
+    </div>
+  </div>
+</section>
+
+<!-- Alianzas -->
+<section id="alianzas" class="py-16 bg-white">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4 section-title">Alianzas</h2>
+    <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+      Creamos alianzas estratégicas con negocios, instituciones y proyectos que impulsan el crecimiento mutuo.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="menu-item bg-gray-50 p-6 rounded-xl shadow-lg">
+        <h3 class="text-2xl font-bold mb-2 text-[#002244]">Alianza Comercial</h3>
+        <p class="text-gray-600">Convenios especiales con empresas locales y nacionales.</p>
+      </div>
+      <div class="menu-item bg-gray-50 p-6 rounded-xl shadow-lg">
+        <h3 class="text-2xl font-bold mb-2 text-[#002244]">Alianza Social</h3>
+        <p class="text-gray-600">Apoyo a causas sociales y proyectos comunitarios.</p>
+      </div>
+      <div class="menu-item bg-gray-50 p-6 rounded-xl shadow-lg">
+        <h3 class="text-2xl font-bold mb-2 text-[#002244]">Alianza Institucional</h3>
+        <p class="text-gray-600">Colaboraciones con escuelas, eventos y dependencias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Eventos -->
+<section id="eventos" class="py-16 bg-[#f9f9f9]">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4 section-title">Eventos</h2>
+    <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+      Llevamos nuestras gorditas a ferias, fiestas, eventos empresariales y celebraciones especiales.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="menu-item bg-white p-6 rounded-xl shadow-lg">
+        <i class="fas fa-music fa-3x text-[#ff6600] mb-4"></i>
+        <h3 class="text-2xl font-bold mb-2 text-[#002244]">Eventos Sociales</h3>
+        <p class="text-gray-600">Bodas, cumpleaños y reuniones familiares.</p>
+      </div>
+      <div class="menu-item bg-white p-6 rounded-xl shadow-lg">
+        <i class="fas fa-building fa-3x text-[#ff6600] mb-4"></i>
+        <h3 class="text-2xl font-bold mb-2 text-[#002244]">Eventos Empresariales</h3>
+        <p class="text-gray-600">Coffee breaks, lanzamientos y convivios corporativos.</p>
+      </div>
+      <div class="menu-item bg-white p-6 rounded-xl shadow-lg">
+        <i class="fas fa-calendar-alt fa-3x text-[#ff6600] mb-4"></i>
+        <h3 class="text-2xl font-bold mb-2 text-[#002244]">Ferias y Festivales</h3>
+        <p class="text-gray-600">Presencia en eventos masivos y culturales.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Comedor Itinerante -->
+<section id="comedor-itinerante" class="py-16 bg-white">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4 section-title">Comedor Itinerante</h2>
+    <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+      Nuestro comedor móvil lleva el sabor de Queremos Gorditas a distintos puntos de la ciudad y el estado.
+    </p>
+
+    <div class="highlight-card max-w-4xl mx-auto">
+      <h3 class="text-3xl font-bold mb-4">¡Vamos hasta ti!</h3>
+      <p class="text-lg">
+        Ideal para colonias, empresas, eventos y comunidades que buscan una experiencia auténtica y deliciosa.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Embajadores -->
+<section id="embajadores" class="py-16 bg-[#f9f9f9]">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4 section-title">Embajadores</h2>
+    <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+      Personas que representan nuestra marca y comparten el amor por las gorditas tradicionales.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="menu-item bg-white p-6 rounded-xl shadow-lg">
+        <i class="fas fa-user fa-3x text-[#ff6600] mb-4"></i>
+        <h3 class="text-xl font-bold text-[#002244]">Embajador</h3>
+        <p class="text-gray-600">Creador de contenido</p>
+      </div>
+      <div class="menu-item bg-white p-6 rounded-xl shadow-lg">
+        <i class="fas fa-user fa-3x text-[#ff6600] mb-4"></i>
+        <h3 class="text-xl font-bold text-[#002244]">Embajador</h3>
+        <p class="text-gray-600">Cliente frecuente</p>
+      </div>
+      <div class="menu-item bg-white p-6 rounded-xl shadow-lg">
+        <i class="fas fa-user fa-3x text-[#ff6600] mb-4"></i>
+        <h3 class="text-xl font-bold text-[#002244]">Embajador</h3>
+        <p class="text-gray-600">Influencer local</p>
+      </div>
+      <div class="menu-item bg-white p-6 rounded-xl shadow-lg">
+        <i class="fas fa-user fa-3x text-[#ff6600] mb-4"></i>
+        <h3 class="text-xl font-bold text-[#002244]">Embajador</h3>
+        <p class="text-gray-600">Colaborador</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Franquicias -->
+<section id="franquicias" class="py-16 bg-white">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-4xl font-bold mb-4 section-title">Franquicias</h2>
+    <p class="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+      Sé parte de Queremos Gorditas y lleva nuestro concepto a tu ciudad.
+    </p>
+
+    <div class="max-w-4xl mx-auto bg-gray-50 p-10 rounded-xl shadow-lg">
+      <h3 class="text-3xl font-bold mb-4 text-[#002244]">Invierte con nosotros</h3>
+      <p class="text-lg text-gray-600 mb-6">
+        Te ofrecemos acompañamiento, capacitación y una marca con identidad sólida y tradición.
+      </p>
+      <a href="#contacto" class="inline-block bg-[#ff6600] hover:bg-[#cc5200] text-white font-bold py-4 px-8 rounded-full transition duration-300">
+        Solicitar Información
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Contacto -->
+  <section id="contacto" class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-6xl">
+      <h2 class="text-4xl font-bold text-center mb-4 section-title">Contacto</h2>
+      <p class="text-xl text-center mb-12 text-gray-600 max-w-3xl mx-auto">Visítanos o contáctanos para hacer tu pedido. ¡Estamos para servirte!</p>
+      
+      <div class="flex flex-col lg:flex-row gap-10">
+        <!-- Formulario y Datos de Contacto -->
+        <div class="lg:w-1/2">
+          <form action="https://formsubmit.co/queremosgorditas@gmail.com" method="POST" class="max-w-lg mx-auto bg-gray-50 p-8 rounded-xl shadow-md">
+            <input type="hidden" name="_subject" value="Nuevo mensaje desde Queremos Gorditas">
+            <input type="hidden" name="_captcha" value="false">
+            <div class="mb-6">
+              <label for="name" class="block text-lg font-medium mb-2">Nombre</label>
+              <input type="text" name="name" id="name" required class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent">
+            </div>
+            <div class="mb-6">
+              <label for="email" class="block text-lg font-medium mb-2">Correo Electrónico</label>
+              <input type="email" name="email" id="email" required class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent">
+            </div>
+            <div class="mb-6">
+              <label for="phone" class="block text-lg font-medium mb-2">Teléfono</label>
+              <input type="tel" name="phone" id="phone" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent">
+            </div>
+            <div class="mb-8">
+              <label for="message" class="block text-lg font-medium mb-2">Mensaje</label>
+              <textarea name="message" id="message" required class="w-full p-4 border border-gray-300 rounded-lg h-40 focus:outline-none focus:ring-2 focus:ring-[#ff6600] focus:border-transparent" placeholder="Ej: Me gustaría ordenar 4 gorditas de chicharrón para llevar..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-[#ff6600] hover:bg-[#cc5200] text-white font-bold py-4 px-6 rounded-lg transition duration-300 text-lg">Enviar Mensaje</button>
+          </form>
+          
+          <div class="mt-10 text-lg bg-gray-50 p-8 rounded-xl shadow-md">
+            <h3 class="text-2xl font-bold mb-6 text-[#002244]">Información de Contacto</h3>
+            <div class="space-y-4">
+              <p class="flex items-start">
+                <i class="fas fa-map-marker-alt text-[#ff6600] mr-4 mt-1"></i>
+                <span><strong>Ubicación:</strong> Veracruz #726 Barrio de San Marcos C.P. 20070 Aguascalientes, Ags.</span>
+              </p>
+              <p class="flex items-center">
+                <i class="fas fa-phone text-[#ff6600] mr-4"></i>
+                <span><strong>Teléfono:</strong> (449) 125-75-60</span>
+              </p>
+              <p class="flex items-center">
+                <i class="fas fa-envelope text-[#ff6600] mr-4"></i>
+                <span><strong>Email:</strong> queremosgorditas@gmail.com</span>
+              </p>
+              <p class="flex items-center">
+                <i class="fas fa-clock text-[#ff6600] mr-4"></i>
+                <span><strong>Horario:</strong> Lunes a Domingo: 8:00 AM - 10:00 PM</span>
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mapa y Redes Sociales -->
+        <div class="lg:w-1/2">
+          <div class="map-container mb-10 rounded-xl overflow-hidden shadow-lg">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.6409490310663!2d-102.28792798567226!3d21.889193185896112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842b1596f624f12f%3A0x9bb05fc100446fa0!2sVeracruz%20726%2C%20San%20Marcos%2C%2020070%20Aguascalientes%2C%20Ags.!5e0!3m2!1ses!2smx!4v1697620908253!5m2!1ses!2smx" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          
+          <div class="bg-[#002244] text-white p-8 rounded-xl shadow-lg">
+            <h3 class="text-2xl font-bold mb-6 text-center">Síguenos en Redes Sociales</h3>
+            <p class="text-center mb-8">Mantente al tanto de nuestras promociones y nuevos platillos.</p>
+            
+            <div class="flex justify-center space-x-8 mb-8">
+              <a href="https://www.facebook.com/QueremosGorditas" target="_blank" class="bg-white text-[#002244] hover:bg-[#ff6600] hover:text-white w-16 h-16 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110">
+                <i class="fab fa-facebook-f fa-2x"></i>
+              </a>
+              <a href="https://www.instagram.com" target="_blank" class="bg-white text-[#002244] hover:bg-[#ff6600] hover:text-white w-16 h-16 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110">
+                <i class="fab fa-instagram fa-2x"></i>
+              </a>
+              <a href="https://wa.me/+524491257560?text=Hola,%20me%20interesan%20sus%20gorditas,%20¿podrían%20darme%20más%20información?" target="_blank" class="bg-white text-[#002244] hover:bg-[#ff6600] hover:text-white w-16 h-16 rounded-full flex items-center justify-center transition duration-300 transform hover:scale-110">
+                <i class="fab fa-whatsapp fa-2x"></i>
+              </a>
+            </div>
+            
+            <div class="text-center">
+              <p class="text-lg">¡Haz tu pedido por teléfono o por WhatsApp!</p>
+              <a href="tel:+524491257560" class="inline-block mt-4 bg-[#ff6600] hover:bg-[#cc5200] text-white font-bold py-3 px-6 rounded-full transition duration-300">
+                <i class="fas fa-phone mr-2"></i> Llamar Ahora
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-[#002244] text-white py-10">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-6 md:mb-0">
+          <h3 class="text-2xl font-bold mb-2">Queremos Gorditas</h3>
+          <p class="text-gray-300">Sabor tradicional desde 2010</p>
+        </div>
+        
+        <div class="mb-6 md:mb-0">
+          <div class="flex space-x-6">
+            <a href="https://www.facebook.com/QueremosGorditas" target="_blank" class="text-gray-300 hover:text-[#ff6600] transition duration-300">
+              <i class="fab fa-facebook fa-2x"></i>
+            </a>
+            <a href="https://www.instagram.com" target="_blank" class="text-gray-300 hover:text-[#ff6600] transition duration-300">
+              <i class="fab fa-instagram fa-2x"></i>
+            </a>
+            <a href="https://wa.me/+524491257560" target="_blank" class="text-gray-300 hover:text-[#ff6600] transition duration-300">
+              <i class="fab fa-whatsapp fa-2x"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div class="text-center md:text-right">
+          <p class="text-gray-300">© 2024 Queremos Gorditas.</p>
+          <p class="text-gray-300">Todos los derechos reservados para PersonalRikdom S.A.P.I. de C.V.</p>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+        <p>Hecho con ❤️ en Aguascalientes, México</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle Mobile Menu
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+    }
+
+    // Back to Top Button
+    const backToTopButton = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTopButton.classList.add('visible');
+      } else {
+        backToTopButton.classList.remove('visible');
+      }
+    });
+    
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Cerrar menú móvil al hacer clic en un enlace
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('hidden');
+      });
+    });
+
+    // Menú Diario Items
+    const menuItems = [
+      { 
+        name: 'Gordita de Chicharrón', 
+        image: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: 'Deliciosa gordita rellena de chicharrón prensado con salsa roja, lechuga, crema y queso.', 
+        price: '$25'
+      },
+      { 
+        name: 'Gordita de Pollo', 
+        image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: 'Gordita con pollo deshebrado en salsa verde, acompañado de cebolla y cilantro.', 
+        price: '$25'
+      },
+      { 
+        name: 'Gordita de Tinga', 
+        image: 'https://images.unsplash.com/photo-1610057099443-648d9c8d8196?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: 'Tinga de pollo o res con chipotle, servida en gordita calientita.', 
+        price: '$25'
+      },
+      { 
+        name: 'Gordita de Barbacoa', 
+        image: 'https://images.unsplash.com/photo-1552332386-f8dd00dc2f85?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: 'Barbacoa de res estilo Hidalgo, con su consomé y salsa borracha.', 
+        price: '$28'
+      },
+      { 
+        name: 'Gordita de Rajas', 
+        image: 'https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: 'Rajas de chile poblano con queso y cebolla, un clásico vegetariano.', 
+        price: '$22'
+      },
+      { 
+        name: 'Gordita de Picadillo', 
+        image: 'https://images.unsplash.com/photo-1603133872878-684f208fb84b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: 'Picadillo de res con papas, zanahorias y especias, todo guisado a la perfección.', 
+        price: '$25'
+      }
+    ];
+
+    // Combos Items
+    const comboItems = [
+      { 
+        name: 'Combo Familiar', 
+        image: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: '6 gorditas (a elegir), 2 aguas frescas de 1L, y papas a la francesa.', 
+        price: '$220'
+      },
+      { 
+        name: 'Combo Individual', 
+        image: 'https://images.unsplash.com/photo-1563379926898-05f4575a45d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: '2 gorditas (a elegir), 1 agua fresca de 500ml, y una orden de frijoles charros.', 
+        price: '$80'
+      },
+      { 
+        name: 'Combo Pareja', 
+        image: 'https://images.unsplash.com/photo-1547592180-85f173990554?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: '4 gorditas (a elegir), 2 aguas frescas de 500ml, y guacamole.', 
+        price: '$150'
+      },
+      { 
+        name: 'Combo Desayuno', 
+        image: 'https://images.unsplash.com/photo-1482049016688-2d3e1b311543?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: '2 gorditas (a elegir), café o chocolate, y fruta de temporada.', 
+        price: '$70'
+      },
+      { 
+        name: 'Combo Estudiantil', 
+        image: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: '3 gorditas (a elegir) y 1 refresco de 600ml. ¡Perfecto para el lunch!', 
+        price: '$90'
+      },
+      { 
+        name: 'Combo Fiesta', 
+        image: 'https://images.unsplash.com/photo-1576866209830-589e1bfbaa4d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80', 
+        description: '12 gorditas (mezcladas), 3L de agua fresca, guacamole y papas.', 
+        price: '$450'
+      }
+    ];
+
+    // Carrusel de imágenes
+    const carouselImages = [
+      'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1551782450-a2132b4ba21d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80',
+      'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80'
+    ];
+
+    let currentSlide = 0;
+
+    function renderCarousel() {
+      const carouselInner = document.getElementById('carousel-inner');
+      carouselInner.innerHTML = '';
+      
+      carouselImages.forEach((image, index) => {
+        const div = document.createElement('div');
+        div.className = 'carousel-item';
+        div.innerHTML = `
+          <img src="${image}" alt="Gorditas del día ${index + 1}" class="w-full h-96 object-cover">
+        `;
+        carouselInner.appendChild(div);
+      });
+      
+      updateCarousel();
+    }
+
+    function updateCarousel() {
+      const carouselInner = document.getElementById('carousel-inner');
+      carouselInner.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % carouselImages.length;
+      updateCarousel();
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + carouselImages.length) % carouselImages.length;
+      updateCarousel();
+    }
+
+    // Auto slide cada 5 segundos
+    setInterval(nextSlide, 5000);
+
+    // Render Menú Diario
+    function renderMenuItems() {
+      const menuContainer = document.getElementById('menu-items');
+      menuContainer.innerHTML = '';
+      
+      menuItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'menu-item bg-white p-6 rounded-xl shadow-lg';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-full h-56 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-bold mb-2 text-[#002244]">${item.name}</h3>
+          <p class="text-gray-600 mb-4">${item.description}</p>
+          <div class="price-tag">${item.price}</div>
+        `;
+        menuContainer.appendChild(div);
+      });
+    }
+
+    // Render Combos
+    function renderComboItems() {
+      const comboContainer = document.getElementById('combo-items');
+      comboContainer.innerHTML = '';
+      
+      comboItems.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'menu-item bg-white p-6 rounded-xl shadow-lg';
+        div.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-full h-56 object-cover rounded-lg mb-4">
+          <h3 class="text-2xl font-bold mb-2 text-[#002244]">${item.name}</h3>
+          <p class="text-gray-600 mb-4">${item.description}</p>
+          <div class="price-tag">${item.price}</div>
+        `;
+        comboContainer.appendChild(div);
+      });
+    }
+
+    // Smooth scroll para los enlaces del menú
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if(targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if(targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Inicializar todo al cargar la página
+    document.addEventListener('DOMContentLoaded', function() {
+      renderCarousel();
+      renderMenuItems();
+      renderComboItems();
+      
+      // Añadir clase activa al enlace del menú actual
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('nav a');
+      
+      window.addEventListener('scroll', () => {
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          
+          if(scrollY >= (sectionTop - 100)) {
+            current = section.getAttribute('id');
+          }
+        });
+        
+        navLinks.forEach(link => {
+          link.classList.remove('text-[#ffcc99]');
+          if(link.getAttribute('href') === `#${current}`) {
+            link.classList.add('text-[#ffcc99]');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

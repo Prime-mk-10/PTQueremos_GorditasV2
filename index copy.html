@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queremos Gorditas</title>
+
+    <!-- Enlace a la fuente Exo desde Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Exo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ff802b; /* Naranja intenso */
+            color: #333;
+            position: relative; /* Para posicionar las decoraciones */
+        }
+
+        /* Estilos de las decoraciones */
+        .decoracion-izquierda {
+            position: fixed;
+            left: auto;
+            top: 5%;
+            width: 20%; /* Ancho del 20% */
+            height: calc(100vh - 100px); /* Altura de la ventana menos el menú */
+            background-image: url('Izquierda.PNG'); /* Imagen de decoración izquierda */
+            background-repeat: no-repeat;
+            background-size: cover; /* Ajustar imagen para cubrir el área */
+            z-index: 10; /* Asegura que esté sobre otros elementos */
+        }
+
+        .decoracion-derecha {
+            position: fixed;
+            right: 1%; /* Margen derecho del 1% */
+            top: 5%; /* A 5% del top */
+            width: 20%; /* Ancho del 20% */
+            height: calc(100vh - 100px); /* Altura de la ventana menos el menú */
+            background-image: url('Derecha.PNG'); /* Imagen de decoración derecha */
+            background-repeat: no-repeat;
+            background-size: cover; /* Ajustar imagen para cubrir el área */
+            z-index: 10; /* Asegura que esté sobre otros elementos */
+        }
+
+        /* Estilos del menú de navegación */
+        nav {
+            background-color: #002244; /* Azul marino */
+            color: #ffffff;
+            padding: 15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            display: flex; /* Para hacer el menú horizontal */
+            justify-content: center; /* Centrar los elementos del menú */
+        }
+
+        nav:hover {
+            background-color: #001122; /* Un tono más oscuro al pasar el mouse */
+        }
+
+        nav a {
+            color: #ffffff;
+            margin: 0 20px; /* Espaciado entre los enlaces */
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            transition: color 0.3s; /* Transición suave para el color */
+        }
+
+        nav a:hover {
+            color: #ffcc99; /* Tono claro de naranja */
+        }
+
+        nav a::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #ffcc99; /* Tono claro de naranja */
+            transition: transform 0.3s; /* Transición suave para la barra */
+            transform: scaleX(0); /* Comienza con escala 0 */
+            margin: auto;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1); /* La barra se expande al 100% al pasar el mouse */
+        }
+
+        /* Espaciador para compensar el menú fijo */
+        .spacer {
+            height: 60px; /* Ajusta esta altura al tamaño del menú */
+        }
+
+           /* Estilos de las secciones */
+        .section {
+            padding: 50px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 1000px;
+            background-color: #ffffff;
+            color: #000000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: transform 0.3s; /* Transición suave para el efecto de escala */
+        }
+
+        .section:hover {
+            transform: scale(1.02); /* Aumenta ligeramente el tamaño al pasar el mouse */
+        }
+
+        /* Estilos del botón de inicio */
+        .inicio-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff6600; /* Naranja intenso */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s; /* Transición suave para el fondo */
+        }
+
+        .inicio-btn:hover {
+            background-color: #cc5200; /* Un tono más oscuro de naranja */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra al pasar el mouse */
+        }
+
+        /* Estilos específicos para el pie de página fijo */
+        footer {
+            background-color: #002244; /* Azul marino */
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Espaciado para compensar el footer fijo */
+        .footer-spacer {
+            height: 50px; /* Ajusta esta altura al tamaño del footer */
+        }
+
+        /* Estilos para el mapa */
+        .map-container {
+            margin-top: 20px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 300px; /* Altura del mapa */
+            border: 0; /* Sin borde */
+        }
+
+        /* Estilos para el logotipo */
+        .logo {
+            position: fixed; /* Fijo en la parte superior de la sección */
+            top: 40px; /* Espacio desde la parte superior */
+            left: 15px; /* Espacio desde la izquierda */
+            width: 100%; /* Aumentar al 100% */
+            max-width: 150px; /* Ajustar el tamaño máximo */
+            z-index: 1100; /* Asegura que el logo esté sobre otros elementos */
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 5)); /* Efecto de brillo permanente */
+            transition: filter 0.3s; /* Transición suave para el brillo */
+        }
+        
+        .logo:hover {
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)); /* Menos brillo al pasar el mouse */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Decoraciones laterales -->
+    <div class="decoracion-izquierda"></div>
+    <div class="decoracion-derecha"></div>
+
+    <!-- Menú de navegación -->
+    <nav>
+        <a href="#inicio">Inicio</a>
+        <a href="#menu-diario">Menú Diario</a>
+        <a href="#combos">Combos</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <!-- Espaciador para compensar el menú fijo -->
+    <div class="spacer"></div>
+
+    <!-- Logotipo -->
+    <img src="Logo.PNG" alt="Logotipo Queremos Gorditas" class="logo">
+
+    <!-- Secciones de la página -->
+    <section id="inicio" class="section">
+        <h2>Inicio</h2>
+        <p>Bienvenidos a Queremos Gorditas. Aquí podrás encontrar la mejor comida.</p>
+        <a href="#inicio" class="inicio-btn">Inicio</a>
+    </section>
+
+    <section id="menu-diario" class="section">
+        <h2>Menú Diario</h2>
+        <p>Descubre nuestras opciones frescas y deliciosas que cambian todos los días.</p>
+        <a href="#inicio" class="inicio-btn">Inicio</a>
+    </section>
+
+    <section id="combos" class="section">
+        <h2>Combos</h2>
+        <p>Aprovecha nuestras promociones especiales y combos para todos los gustos.</p>
+        <a href="#inicio" class="inicio-btn">Inicio</a>
+    </section>
+
+    <section id="contacto" class="section">
+        <h2>Contacto</h2>
+        <p>Ubicación: Veracruz #726 Barrio de San Marcos C.P. 20070 Aguascalientes, Ags.</p>
+        <p>Teléfono: (449) 125-75-60</p>
+        <p>Email: info@queremosgorditas.com</p>
+
+        <!-- Mapa de Google Maps -->
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.6409490310663!2d-102.28792798567226!3d21.889193185896112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842b1596f624f12f%3A0x9bb05fc100446fa0!2sVeracruz%20726%2C%20San%20Marcos%2C%2020070%20Aguascalientes%2C%20Ags.!5e0!3m2!1ses!2smx!4v1697620908253!5m2!1ses!2smx" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <a href="#inicio" class="inicio-btn">Inicio</a>
+    </section>
+
+    <!-- Espaciador para el footer fijo -->
+    <div class="footer-spacer"></div>
+
+    <!-- Pie de página -->
+    <footer>
+        <p>&copy; 2024 Queremos Gorditas. Todos los derechos reservados para PersonalRikdom S.A.P.I. de C.V.</p>
+    </footer>
+
+</body>
+</html>
