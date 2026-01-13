@@ -1,0 +1,444 @@
+/* Estilos personalizados para Queremos Gorditas */
+body {
+  font-family: 'Exo', sans-serif;
+  background-color: #fff8f0;
+}
+
+.logo {
+  max-width: 70px;
+  height: auto;
+  transition: transform 0.3s ease;
+  background-color: white;
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.menu-item {
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  border-color: #ff802b;
+  box-shadow: 0 10px 20px rgba(255, 128, 43, 0.2);
+}
+
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #ff6600;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+#back-to-top:hover {
+  background-color: #cc5200;
+  transform: scale(1.1);
+}
+
+.hero {
+  background: linear-gradient(rgba(0, 34, 68, 0.85), rgba(255, 102, 0, 0.7)), url('https://images.unsplash.com/photo-1599974579688-8dbdd335c77f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1740&q=80');
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 60vh;
+    padding: 20px;
+  }
+  
+  .hero h1 {
+    font-size: 2.5rem !important;
+  }
+  
+  .hero p {
+    font-size: 1.1rem !important;
+  }
+}
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 2rem;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 4px;
+  background-color: #ff802b;
+  bottom: -10px;
+  left: 20%;
+  border-radius: 2px;
+}
+
+.price-tag {
+  background-color: #ff802b;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3rem;
+}
+
+.carousel-inner {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  min-width: 100%;
+  transition: opacity 0.5s ease;
+}
+
+.carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s;
+}
+
+.carousel-control:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-control.prev {
+  left: 15px;
+}
+
+.carousel-control.next {
+  right: 15px;
+}
+
+@media (max-width: 768px) {
+  .carousel-control {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .carousel-control.prev {
+    left: 10px;
+  }
+  
+  .carousel-control.next {
+    right: 10px;
+  }
+}
+
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  background-color: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.whatsapp-float:hover {
+  background-color: #128C7E;
+  transform: scale(1.1);
+}
+
+.whatsapp-text {
+  position: absolute;
+  left: 70px;
+  background-color: #25D366;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .whatsapp-float {
+    bottom: 90px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .whatsapp-float i {
+    font-size: 1.5rem;
+  }
+  
+  .whatsapp-text {
+    display: none;
+  }
+}
+
+.highlight-card {
+  background: linear-gradient(135deg, #ff802b, #ff6600);
+  color: white;
+  border-radius: 15px;
+  padding: 2rem;
+  margin: 2rem 0;
+  box-shadow: 0 15px 30px rgba(255, 102, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .highlight-card {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .highlight-card h2 {
+    font-size: 1.8rem !important;
+  }
+  
+  .highlight-card p {
+    font-size: 1rem !important;
+  }
+}
+
+.floating-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+/* === CORRECCIONES PARA EL NAVBAR === */
+
+/* Menú móvil mejorado */
+#mobile-menu {
+  transition: all 0.3s ease-in-out;
+  max-height: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #002244;
+  z-index: 40;
+  display: none; /* Oculto por defecto */
+}
+
+#mobile-menu.active {
+  max-height: 80vh;
+  overflow-y: auto;
+  display: block; /* Mostrar cuando está activo */
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* Menú desktop - ocultar en pantallas pequeñas */
+.desktop-menu {
+  display: none; /* Oculto por defecto */
+  flex-wrap: wrap;
+}
+
+/* Mostrar menú desktop solo en pantallas grandes (≥1024px) */
+@media (min-width: 1024px) {
+  .desktop-menu {
+    display: flex;
+  }
+  
+  /* Ocultar menú móvil en pantallas grandes */
+  #mobile-menu {
+    display: none !important;
+  }
+  
+  #mobile-menu.active {
+    display: none !important;
+  }
+}
+
+/* Botón hamburguesa */
+.hamburger-btn {
+  display: block; /* Mostrar por defecto */
+}
+
+/* Ocultar hamburguesa en pantallas grandes (≥1024px) */
+@media (min-width: 1024px) {
+  .hamburger-btn {
+    display: none;
+  }
+}
+
+/* Asegurar que el navbar sea responsive */
+nav {
+  position: relative;
+}
+
+/* Mejorar el espaciado en móvil */
+@media (max-width: 1023px) {
+  .desktop-menu {
+    display: none !important;
+  }
+  
+  .hamburger-btn {
+    z-index: 50;
+  }
+}
+
+/* Ajustar el menú móvil para pantallas muy pequeñas */
+@media (max-width: 640px) {
+  #mobile-menu {
+    width: 100%;
+  }
+  
+  #mobile-menu a {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Ajustes generales de responsividad */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .section-title {
+    font-size: 2rem !important;
+  }
+  
+  .menu-item {
+    padding: 1.5rem !important;
+  }
+  
+  .menu-item h3 {
+    font-size: 1.5rem !important;
+  }
+  
+  footer .flex {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  footer .flex > div {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Estilos para el menú desktop completo */
+.desktop-menu a {
+  white-space: nowrap;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 1280px) {
+  .desktop-menu a {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* === ESTILOS ADICIONALES PARA MEJOR VISUALIZACIÓN === */
+
+/* Asegurar que los enlaces del menú móvil sean legibles */
+#mobile-menu a {
+  display: block;
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+}
+
+#mobile-menu a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Transición suave para el menú móvil */
+#mobile-menu {
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  opacity: 0;
+}
+
+#mobile-menu.active {
+  opacity: 1;
+}
+
+/* Mejorar visibilidad del botón hamburguesa en móvil */
+.hamburger-btn button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.3s;
+}
+
+.hamburger-btn button:hover {
+  color: #ffcc99;
+}
+
+/* Ajustar logo en pantallas pequeñas */
+@media (max-width: 640px) {
+  .logo {
+    max-width: 60px;
+  }
+  
+  .text-xl {
+    font-size: 1.1rem;
+  }
+}
